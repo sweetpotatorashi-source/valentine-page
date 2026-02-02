@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <title>Be My Valentine, Amir? 💘</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <!-- Cute Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet" />
-
   <style>
     * {
       box-sizing: border-box;
@@ -34,281 +32,248 @@
       max-width: 500px;
       width: 100%;
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
 
-    /* Floating hearts in background */
-    .heart-bg {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      background: #ff4d6d;
-      transform: rotate(-45deg);
-      opacity: 0.18;
-      top: -20px;
-      right: -10px;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .heart-bg::before,
-    .heart-bg::after {
-      content: "";
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      background: #ff4d6d;
-      border-radius: 50%;
-    }
-
-    .heart-bg::before {
-      top: -40px;
-      left: 0;
-    }
-
-    .heart-bg::after {
-      left: 40px;
-      top: 0;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(-45deg); }
-      50% { transform: translateY(-12px) rotate(-45deg); }
-    }
-
-    /* Main heart */
     .heart {
-      width: 90px;
-      height: 90px;
-      background: #ff4d6d;
-      position: relative;
-      margin: 0 auto 1.5rem;
-      transform: rotate(-45deg);
-      animation: beat 1s infinite;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      background: #ff4d6d;
-      border-radius: 50%;
-    }
-
-    .heart::before {
-      top: -45px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: 45px;
-      top: 0;
-    }
-
-    @keyframes beat {
-      0% { transform: scale(1) rotate(-45deg); }
-      25% { transform: scale(1.1) rotate(-45deg); }
-      50% { transform: scale(1) rotate(-45deg); }
-      75% { transform: scale(1.1) rotate(-45deg); }
-      100% { transform: scale(1) rotate(-45deg); }
+      font-size: 4rem;
+      margin-bottom: 1rem;
     }
 
     h1 {
-      font-size: 1.9rem;
-      margin-bottom: 0.4rem;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
 
-    .small-text {
-      font-size: 0.9rem;
-      margin-bottom: 1.4rem;
-      opacity: 0.8;
+    .subtitle {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      color: #8b3a62;
     }
 
-    .question {
-      font-size: 1.4rem;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Photos section */
-    .photos-section {
-      margin: 1.5rem 0;
+    .photos {
       display: flex;
+      gap: 1.5rem;
       justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+      margin: 2rem 0;
     }
 
-    .photo-box {
-      width: 120px;
-      height: 120px;
+    .photo-frame {
+      width: 100px;
+      height: 100px;
+      border: 4px solid #ff6b9d;
       border-radius: 12px;
-      background: #f0f0f0;
-      border: 3px solid #ff4d6d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
       overflow: hidden;
-      position: relative;
-      box-shadow: 0 4px 8px rgba(255, 77, 109, 0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .photo-box img {
+    .photo-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
-    .photo-label {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 77, 109, 0.9);
-      color: white;
-      font-size: 0.75rem;
-      padding: 0.4rem;
-      text-align: center;
+    .question {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
     }
 
-    .buttons {
+    .options {
       display: flex;
-      justify-content: center;
       gap: 1rem;
-      margin: 1.5rem 0;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
     }
 
-    button {
+    .option-btn {
+      background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+      color: white;
       border: none;
-      padding: 0.7rem 1.6rem;
-      border-radius: 999px;
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-family: 'Schoolbell', cursive;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+      position: relative;
+    }
+
+    .option-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 107, 157, 0.5);
+    }
+
+    .option-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal-icon {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-text {
+      font-size: 1.2rem;
+      color: #5b2140;
+      margin-bottom: 1.5rem;
+    }
+
+    .close-btn {
+      background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-family: 'Schoolbell', cursive;
       font-size: 1rem;
       cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
+      transition: all 0.3s ease;
     }
 
-    #yesBtn {
-      background: #ff4d6d;
-      color: #fff;
-      box-shadow: 0 6px 15px rgba(255, 77, 109, 0.4);
-      position: relative;
-      z-index: 2;
-    }
-
-    #yesBtn:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 10px 20px rgba(255, 77, 109, 0.5);
-    }
-
-    #noBtn {
-      background: #ffe5ec;
-      color: #5b2140;
-      position: relative;
-      z-index: 1;
-    }
-
-    #noBtn:hover {
+    .close-btn:hover {
       transform: translateY(-2px);
-      background: #ffd6e2;
     }
 
-    .answer-message {
-      margin-top: 1.8rem;
-      font-size: 1.2rem;
-      line-height: 1.4;
-      min-height: 1.6em;
+    .footer {
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+      color: #8b3a62;
     }
 
-    .signature {
-      margin-top: 1.6rem;
-      font-size: 0.95rem;
-      opacity: 0.85;
+    .sparkle {
+      animation: sparkle 1s ease-in-out infinite;
     }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 1.6rem; }
-      .question { font-size: 1.25rem; }
-      .buttons {
-        flex-direction: row;
-        gap: 0.6rem;
-      }
-      button {
-        padding: 0.6rem 1.2rem;
-      }
-      .photo-box {
-        width: 100px;
-        height: 100px;
-      }
+    @keyframes sparkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <div class="heart-bg"></div>
+    <div class="heart">💖</div>
+    <h1>Hi Amir <span class="sparkle">💕</span></h1>
+    <p class="subtitle">I made you this little page because you're special to me.</p>
 
-    <div class="heart"></div>
-
-    <h1>Hi Amir 💌</h1>
-    <p class="small-text">I made you this little page because you're special to me.</p>
-
-    <!-- Photos Section -->
-    <div class="photos-section">
-      <div class="photo-box">
-        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=300&h=300&fit=crop" alt="Us together">
+    <div class="photos">
+      <div class="photo-frame">
+        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=300&h=300&fit=crop" alt="Rose" />
       </div>
-      <div class="photo-box">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop" alt="My favorite memory">
+      <div class="photo-frame">
+        <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=300&h=300&fit=crop" alt="Amir" />
       </div>
     </div>
 
     <p class="question">Will you be my Valentine this year?</p>
 
-    <div class="buttons">
-      <button id="yesBtn">Yes 💖</button>
-      <button id="noBtn">No 🙈</button>
+    <div class="options">
+      <button class="option-btn" onclick="showModal('rose')">🌹 Rose</button>
+      <button class="option-btn" onclick="showModal('cat')">🐱 Kitty</button>
+      <button class="option-btn" onclick="showModal('samosa')">🥟 Samosa</button>
     </div>
 
-    <p class="answer-message" id="answerMsg"></p>
-    <p class="signature">Made with love by me, just for you. 🥰</p>
+    <p class="footer">Made with love by me, just for you 💑</p>
+  </div>
+
+  <!-- Rose Modal -->
+  <div id="roseModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon">🌹</div>
+      <p class="modal-text">A beautiful rose for my beautiful love! This represents the beauty and elegance I see in you every day.</p>
+      <button class="close-btn" onclick="closeModal('rose')">Close</button>
+    </div>
+  </div>
+
+  <!-- Cat Modal -->
+  <div id="catModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon">🐱</div>
+      <p class="modal-text">A cute kitty for you! Soft, adorable, and full of purrs - just like how I feel about you!</p>
+      <button class="close-btn" onclick="closeModal('cat')">Close</button>
+    </div>
+  </div>
+
+  <!-- Samosa Modal -->
+  <div id="samosaModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon">🥟</div>
+      <p class="modal-text">A delicious samosa for you! Because you're spicy, sweet, and absolutely irresistible!</p>
+      <button class="close-btn" onclick="closeModal('samosa')">Close</button>
+    </div>
   </div>
 
   <script>
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
-    const answerMsg = document.getElementById('answerMsg');
-
-    const noMessages = [
-      "Are you sureee? 🥺",
-      "Think again… I'm very cute. 😼",
-      "Wrong button, try the other one! 😉",
-      "Hmm, that hurt a little. 💔",
-      "Last chanceeee… 👀"
-    ];
-
-    let noClickCount = 0;
-
-    yesBtn.addEventListener('click', () => {
-      answerMsg.textContent = "YAY! I knew you'd say yes. I love you so much, Amir. 💘";
-      yesBtn.style.transform = "scale(1.15)";
-      yesBtn.disabled = true;
-      noBtn.disabled = true;
-    });
-
-    noBtn.addEventListener('click', () => {
-      if (noClickCount < noMessages.length) {
-        answerMsg.textContent = noMessages[noClickCount];
-      } else {
-        answerMsg.textContent = "Okay, okay, I'm stealing you as my Valentine anyway. 😏";
+    function showModal(type) {
+      const modals = {
+        'rose': 'roseModal',
+        'cat': 'catModal',
+        'samosa': 'samosaModal'
+      };
+      const modalId = modals[type];
+      if (modalId) {
+        document.getElementById(modalId).classList.add('active');
       }
+    }
 
-      const currentScale = 1 + noClickCount * 0.08;
-      yesBtn.style.transform = `scale(${currentScale})`;
+    function closeModal(type) {
+      const modals = {
+        'rose': 'roseModal',
+        'cat': 'catModal',
+        'samosa': 'samosaModal'
+      };
+      const modalId = modals[type];
+      if (modalId) {
+        document.getElementById(modalId).classList.remove('active');
+      }
+    }
 
-      noClickCount++;
+    // Close modal when clicking outside of it
+    document.addEventListener('click', function(event) {
+      const modals = document.querySelectorAll('.modal');
+      modals.forEach(modal => {
+        if (event.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
     });
   </script>
 </body>
