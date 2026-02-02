@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Be My Valentine, Amir? 💘</title>
+  <title>Be My Valentine? 💘</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Cute Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -24,24 +23,38 @@
       padding: 20px;
     }
 
+    .page {
+      display: none;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .page.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
     .card {
       background: #fff;
       padding: 2.5rem 2rem;
       border-radius: 24px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-      max-width: 500px;
       width: 100%;
       text-align: center;
+    }
+
+    /* HOME PAGE */
+    .home-page .card {
+      max-width: 500px;
     }
 
     .heart {
       font-size: 4rem;
       margin-bottom: 1rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
     }
 
     .subtitle {
@@ -91,12 +104,11 @@
       border: none;
       padding: 1rem 1.5rem;
       border-radius: 50px;
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-family: 'Schoolbell', cursive;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
-      position: relative;
     }
 
     .option-btn:hover {
@@ -104,59 +116,28 @@
       box-shadow: 0 6px 20px rgba(255, 107, 157, 0.5);
     }
 
-    .option-btn:active {
-      transform: translateY(-1px);
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 1000;
+    /* RESULT PAGES */
+    .result-page .card {
+      max-width: 700px;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
     }
 
-    .modal.active {
-      display: flex;
+    .large-emoji {
+      font-size: 10rem;
+      margin-bottom: 2rem;
+      animation: float 3s ease-in-out infinite;
     }
 
-    .modal-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 20px;
-      text-align: center;
-      max-width: 400px;
-      animation: popIn 0.3s ease;
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
     }
 
-    @keyframes popIn {
-      from {
-        transform: scale(0.7);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    .modal-icon {
-      font-size: 5rem;
-      margin-bottom: 1rem;
-    }
-
-    .modal-text {
-      font-size: 1.2rem;
-      color: #5b2140;
-      margin-bottom: 1.5rem;
-    }
-
-    .close-btn {
+    .back-btn {
       background: linear-gradient(135deg, #ff6b9d, #ff8fab);
       color: white;
       border: none;
@@ -165,10 +146,11 @@
       font-family: 'Schoolbell', cursive;
       font-size: 1rem;
       cursor: pointer;
+      margin-top: 2rem;
       transition: all 0.3s ease;
     }
 
-    .close-btn:hover {
+    .back-btn:hover {
       transform: translateY(-2px);
     }
 
@@ -189,92 +171,78 @@
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="heart">💖</div>
-    <h1>Hi Amir <span class="sparkle">💕</span></h1>
-    <p class="subtitle">I made you this little page because you're special to me.</p>
+  <!-- HOME PAGE -->
+  <div id="homePage" class="page active home-page">
+    <div class="card">
+      <div class="heart">💖</div>
+      <p class="subtitle">I made you this special page because you're amazing.</p>
 
-    <div class="photos">
-      <div class="photo-frame">
-        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=300&h=300&fit=crop" alt="Rose" />
+      <div class="photos">
+        <div class="photo-frame">
+          <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=300&h=300&fit=crop" alt="" />
+        </div>
+        <div class="photo-frame">
+          <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=300&h=300&fit=crop" alt="" />
+        </div>
       </div>
-      <div class="photo-frame">
-        <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=300&h=300&fit=crop" alt="Amir" />
+
+      <p class="question">Will you be my Valentine this year?</p>
+
+      <div class="options">
+        <button class="option-btn" onclick="goToPage('rose')">🌹</button>
+        <button class="option-btn" onclick="goToPage('cat')">🐱</button>
+        <button class="option-btn" onclick="goToPage('samosa')">🥟</button>
       </div>
-    </div>
 
-    <p class="question">Will you be my Valentine this year?</p>
-
-    <div class="options">
-      <button class="option-btn" onclick="showModal('rose')">🌹 Rose</button>
-      <button class="option-btn" onclick="showModal('cat')">🐱 Kitty</button>
-      <button class="option-btn" onclick="showModal('samosa')">🥟 Samosa</button>
-    </div>
-
-    <p class="footer">Made with love by me, just for you 💑</p>
-  </div>
-
-  <!-- Rose Modal -->
-  <div id="roseModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-icon">🌹</div>
-      <p class="modal-text">A beautiful rose for my beautiful love! This represents the beauty and elegance I see in you every day.</p>
-      <button class="close-btn" onclick="closeModal('rose')">Close</button>
+      <p class="footer">Made with love by me, just for you 💑</p>
     </div>
   </div>
 
-  <!-- Cat Modal -->
-  <div id="catModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-icon">🐱</div>
-      <p class="modal-text">A cute kitty for you! Soft, adorable, and full of purrs - just like how I feel about you!</p>
-      <button class="close-btn" onclick="closeModal('cat')">Close</button>
+  <!-- ROSE PAGE -->
+  <div id="rosePage" class="page result-page">
+    <div class="card">
+      <div class="large-emoji">🌹</div>
+      <button class="back-btn" onclick="goToPage('home')">← Back</button>
     </div>
   </div>
 
-  <!-- Samosa Modal -->
-  <div id="samosaModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-icon">🥟</div>
-      <p class="modal-text">A delicious samosa for you! Because you're spicy, sweet, and absolutely irresistible!</p>
-      <button class="close-btn" onclick="closeModal('samosa')">Close</button>
+  <!-- CAT PAGE -->
+  <div id="catPage" class="page result-page">
+    <div class="card">
+      <div class="large-emoji">🐱</div>
+      <button class="back-btn" onclick="goToPage('home')">← Back</button>
+    </div>
+  </div>
+
+  <!-- SAMOSA PAGE -->
+  <div id="samosaPage" class="page result-page">
+    <div class="card">
+      <div class="large-emoji">🥟</div>
+      <button class="back-btn" onclick="goToPage('home')">← Back</button>
     </div>
   </div>
 
   <script>
-    function showModal(type) {
-      const modals = {
-        'rose': 'roseModal',
-        'cat': 'catModal',
-        'samosa': 'samosaModal'
-      };
-      const modalId = modals[type];
-      if (modalId) {
-        document.getElementById(modalId).classList.add('active');
+    function goToPage(page) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+      // Show the selected page
+      switch(page) {
+        case 'home':
+          document.getElementById('homePage').classList.add('active');
+          break;
+        case 'rose':
+          document.getElementById('rosePage').classList.add('active');
+          break;
+        case 'cat':
+          document.getElementById('catPage').classList.add('active');
+          break;
+        case 'samosa':
+          document.getElementById('samosaPage').classList.add('active');
+          break;
       }
     }
-
-    function closeModal(type) {
-      const modals = {
-        'rose': 'roseModal',
-        'cat': 'catModal',
-        'samosa': 'samosaModal'
-      };
-      const modalId = modals[type];
-      if (modalId) {
-        document.getElementById(modalId).classList.remove('active');
-      }
-    }
-
-    // Close modal when clicking outside of it
-    document.addEventListener('click', function(event) {
-      const modals = document.querySelectorAll('.modal');
-      modals.forEach(modal => {
-        if (event.target === modal) {
-          modal.classList.remove('active');
-        }
-      });
-    });
   </script>
 </body>
 </html>
