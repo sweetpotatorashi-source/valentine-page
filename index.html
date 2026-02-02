@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Be My Valentine? 💘</title>
+  <title>Be My Valentine, Amir? 💘</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Cute Google Font -->
@@ -23,6 +23,7 @@
       align-items: center;
       justify-content: center;
       color: #5b2140;
+      padding: 20px;
     }
 
     .card {
@@ -30,8 +31,8 @@
       padding: 2.5rem 2rem;
       border-radius: 24px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-      max-width: 420px;
-      width: 92%;
+      max-width: 500px;
+      width: 100%;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -127,13 +128,54 @@
 
     .question {
       font-size: 1.4rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Photos section */
+    .photos-section {
+      margin: 1.5rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .photo-box {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      background: #f0f0f0;
+      border: 3px solid #ff4d6d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 77, 109, 0.9);
+      color: white;
+      font-size: 0.8rem;
+      padding: 0.3rem;
     }
 
     .buttons {
       display: flex;
       justify-content: center;
       gap: 1rem;
+      margin: 1.5rem 0;
     }
 
     button {
@@ -194,6 +236,10 @@
       button {
         padding: 0.6rem 1.2rem;
       }
+      .photo-box {
+        width: 100px;
+        height: 100px;
+      }
     }
   </style>
 </head>
@@ -203,8 +249,20 @@
 
     <div class="heart"></div>
 
-    <h1>Hi my love 💌</h1>
+    <h1>Hi Amir 💌</h1>
     <p class="small-text">I made you this little page because you're special to me.</p>
+
+    <!-- Photos Section -->
+    <div class="photos-section">
+      <div class="photo-box">
+        <img src="" alt="Us together">
+        <div class="photo-label" style="display:none;">Together</div>
+      </div>
+      <div class="photo-box">
+        <img src="" alt="My favorite memory">
+        <div class="photo-label" style="display:none;">Memories</div>
+      </div>
+    </div>
 
     <p class="question">Will you be my Valentine this year?</p>
 
@@ -233,7 +291,7 @@
     let noClickCount = 0;
 
     yesBtn.addEventListener('click', () => {
-      answerMsg.textContent = "YAY! I knew you'd say yes. I love you so much. 💘";
+      answerMsg.textContent = "YAY! I knew you'd say yes. I love you so much, Amir. 💘";
       yesBtn.style.transform = "scale(1.15)";
       yesBtn.disabled = true;
       noBtn.disabled = true;
@@ -246,7 +304,6 @@
         answerMsg.textContent = "Okay, okay, I'm stealing you as my Valentine anyway. 😏";
       }
 
-      // Make the Yes button grow a bit each time
       const currentScale = 1 + noClickCount * 0.08;
       yesBtn.style.transform = `scale(${currentScale})`;
 
